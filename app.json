@@ -1,0 +1,62 @@
+{
+  "expo": {
+    "name": "kb-ui-design",
+    "slug": "kb-ui-design",
+    "scheme": "kbuidesign",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "icon": "./assets/images/app-icon/icon.png",
+    "newArchEnabled": true,
+    "jsEngine": "hermes",
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "icon": "./assets/images/app-icon/android-legacy.png",
+      "package": "com.kbui.design",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/app-icon/adaptive-foreground.png",
+        "backgroundImage": "./assets/images/app-icon/adaptive-background.png"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "ios": {
+      "icon": "./assets/images/app-icon/ios.png",
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kbui.design"
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Inter18pt-Regular.ttf",
+            "./assets/fonts/Inter18pt-Medium.ttf",
+            "./assets/fonts/Inter18pt-Bold.ttf"
+          ]
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/app-icon/adaptive-foreground.png",
+          "imageWidth": 300,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "react-native-edge-to-edge",
+        {
+          "android": {
+            "parentTheme": "Light",
+            "enforceNavigationBarContrast": false
+          }
+        }
+      ],
+      "expo-build-properties"
+    ],
+    "experiments": {
+      "tsconfigPaths": true
+    }
+  }
+}
