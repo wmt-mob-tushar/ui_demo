@@ -20,17 +20,13 @@ A React Native (Expo SDK 56) UI demo app — Android.
 ## Run on an Android device
 
 ```bash
-# 1. Install JS dependencies
+# 1. Install JS dependencies (Skia native binaries are fetched automatically)
 bun install
 
-# 2. Download the Skia native binaries
-#    (bun blocks the @shopify/react-native-skia postinstall, so run this once)
-npx install-skia
-
-# 3. Generate the native android/ project from app.json
+# 2. Generate the native android/ project from app.json
 bun run prebuild:clean
 
-# 4. Build, install and launch on the connected device/emulator
+# 3. Build, install and launch on the connected device/emulator
 bun android
 ```
 
