@@ -1,10 +1,10 @@
 # KB Demo
 
-A React Native (Expo SDK 56) UI demo app.
+A React Native (Expo SDK 56) UI demo app — Android.
 
 **Stack:** Expo SDK 56 · React Native 0.85 · React Navigation · Redux Toolkit · react-native-unistyles · react-native-reanimated · @shopify/react-native-skia · react-native-svg · i18next.
 
-> **Note on `android/` and `ios/`:** these native folders are **not committed** to the repo. They are generated from `app.json` by the **`expo prebuild`** command (Continuous Native Generation), so the app icon, splash, name, and native config always stay in sync with `app.json`. You generate them locally with the prebuild step below.
+> **Note on `android/`:** the native folder is **not committed** — it's generated from `app.json` by the **`bun run prebuild:clean`** command (Continuous Native Generation), so the app icon, splash, name and native config stay in sync with `app.json`. Generate it locally with the prebuild step below.
 
 ---
 
@@ -27,14 +27,14 @@ bun install
 #    (bun blocks the @shopify/react-native-skia postinstall, so run this once)
 npx install-skia
 
-# 3. Generate the native android/ (and ios/) projects from app.json
-npx expo prebuild --clean
+# 3. Generate the native android/ project from app.json
+bun run prebuild:clean
 
 # 4. Build, install and launch on the connected device/emulator
-npx expo run:android
+bun android
 ```
 
-`expo run:android` compiles the app, installs it, and starts the Metro bundler. Leave it running.
+`bun android` compiles the app, installs it, and starts the Metro bundler. Leave it running.
 
 ### Day-to-day
 
@@ -56,7 +56,7 @@ bun run adb
 ## Build a release APK
 
 ```bash
-npx expo prebuild --clean        # if android/ isn't generated yet
+bun run prebuild:clean                    # if android/ isn't generated yet
 cd android && ./gradlew assembleRelease
 ```
 
@@ -66,9 +66,7 @@ The APK is written to:
 android/app/build/outputs/apk/release/app-release.apk
 ```
 
-(The release build is signed with the bundled debug keystore, so it installs on any device. For Play Store distribution, configure your own keystore in `android/app/build.gradle`.)
-
-Install it on a connected device:
+The release build is signed with the bundled debug keystore, so it installs on any device. Install it with:
 
 ```bash
 adb install -r android/app/build/outputs/apk/release/app-release.apk
@@ -80,22 +78,35 @@ adb install -r android/app/build/outputs/apk/release/app-release.apk
 
 ```
 src/
-  component/   reusable UI (ui/) + composite views (view/)
-  screens/     Authenticated/ + UnAuthenticated/ screens
-  router/      React Navigation stacks + bottom tabs
+  component/    reusable UI (ui/) + composite views (view/)
+  screens/      Authenticated/ + UnAuthenticated/ screens
+  router/       React Navigation stacks + bottom tabs
   reduxToolkit/ store + slice
-  theme/       colors, spacing, typography, unistyles config, assets
-  i18n/        translations
-  data/        demo/dummy data
-  utils/       shared types + helpers
-assets/        fonts, icons (svg), images, app-icon/
+  theme/        colors, spacing, typography, unistyles config, assets
+  i18n/         translations
+  data/         demo/dummy data
+  utils/        shared types + helpers
+assets/         fonts, icons (svg), images, app-icon/
 ```
 
 ## Useful scripts
 
 ```bash
-bun run compile      # tsc type-check
-bun run lint         # eslint --fix
-bun run android      # expo run:android
-bun run prebuild:clean  # expo prebuild --clean
+bun run compile         # tsc type-check
+bun run lint            # eslint --fix
+bun android             # build + run on Android
+bun run prebuild:clean  # regenerate native android/ from app.json
+```
+
+---
+
+## Notes
+
+- **Scope / timeline:** given the timeline, the focus was mostly on the **UI** (layouts, components, theming) rather than heavy animation work.
+- **Feature ideas (if more time):**
+  - A **sticky header** on the Lesson screen.
+  - More **interactive animations** throughout.
+- **Styling:** [react-native-unistyles](https://www.unistyl.es/) for a modern, theme-driven styling approach (design tokens + responsive `rw`/`rh`/`rf` helpers).
+- **Platform:** built with **Expo** (managed native via prebuild). iOS isn't included here as I don't have a Mac machine.
+- **AI tools used:** Antigravity and Cursor for development, and ChatGPT for generating the SVG assets.
 ```
