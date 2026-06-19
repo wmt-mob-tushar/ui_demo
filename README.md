@@ -8,6 +8,18 @@ A React Native (Expo SDK 56) UI demo app — Android.
 
 ---
 
+## Notes
+
+- **Scope / timeline:** given the timeline, the focus was mostly on the **UI** (layouts, components, theming) rather than heavy animation work.
+- **Feature ideas (if more time):**
+  - A **sticky header** on the Lesson screen.
+  - More **interactive animations** throughout.
+- **Styling:** [react-native-unistyles](https://www.unistyl.es/) for a modern, theme-driven styling approach (design tokens + responsive `rw`/`rh`/`rf` helpers).
+- **Platform:** built with **Expo** (managed native via prebuild). iOS isn't included here as I don't have a Mac machine.
+- **AI tools used:** Antigravity and Cursor for development, and ChatGPT for generating the SVG assets.
+
+---
+
 ## Prerequisites
 
 - **Node.js** ≥ 20 and **bun** (`npm i -g bun`)
@@ -92,17 +104,4 @@ bun run compile         # tsc type-check
 bun run lint            # eslint --fix
 bun android             # build + run on Android
 bun run prebuild:clean  # regenerate native android/ from app.json
-```
-
----
-
-## Notes
-
-- **Scope / timeline:** given the timeline, the focus was mostly on the **UI** (layouts, components, theming) rather than heavy animation work.
-- **Feature ideas (if more time):**
-  - A **sticky header** on the Lesson screen.
-  - More **interactive animations** throughout.
-- **Styling:** [react-native-unistyles](https://www.unistyl.es/) for a modern, theme-driven styling approach (design tokens + responsive `rw`/`rh`/`rf` helpers).
-- **Platform:** built with **Expo** (managed native via prebuild). iOS isn't included here as I don't have a Mac machine.
-- **AI tools used:** Antigravity and Cursor for development, and ChatGPT for generating the SVG assets.
 ```
