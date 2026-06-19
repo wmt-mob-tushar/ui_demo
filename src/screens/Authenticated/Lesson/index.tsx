@@ -2,6 +2,7 @@ import { useCallback, useMemo } from 'react';
 import { FlatList, View, Pressable, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
 import { Ionicons as Icon } from '@expo/vector-icons';
 import { CircularProgress, GlassView, LessonCard, StepIndicator, Text } from '@/component';
 import { TxKeyPath } from '@/i18n';
@@ -9,6 +10,7 @@ import { assets, colors } from '@/theme';
 import { lessonsData } from '@/data/lessons';
 import { LessonStatus } from '@/utils';
 import { styles } from './styles';
+import { useUnistyles } from 'react-native-unistyles';
 
 type LessonItem = (typeof lessonsData)[number];
 
@@ -18,6 +20,7 @@ const PROGRESS = 1.3;
 const Lesson = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
+  const {theme} = useUnistyles()
   const onBack = useCallback(() => navigation.goBack(), [navigation]);
 
   const renderItem = useCallback(({ item, index }: { item: LessonItem; index: number }) => {
@@ -42,7 +45,6 @@ const Lesson = () => {
             bg={item.bg}
             buttonTx={buttonTx}
             disabled={status !== LessonStatus.Active}
-            faded={index > Math.floor(PROGRESS) + 1}
           />
         </View>
       </View>
@@ -82,7 +84,7 @@ const Lesson = () => {
           </View>
         </View>
 
-        <GlassView style={styles.banner} borderRadius={25}>
+        <GlassView style={styles.banner} borderRadius={32} intensity={43} tint={theme.colors.mint}>
           <assets.RobotSvg width={44} height={44} />
           <View style={styles.bannerTextCol}>
             <Text tx="lessonsScreen:aiBuddyLabel" style={styles.bannerSubtitle} />
@@ -91,7 +93,7 @@ const Lesson = () => {
           <View style={styles.ringCircle}>
             <CircularProgress
               size={48}
-              strokeWidth={8}
+              strokeWidth={6}
               progress={Math.round((PROGRESS / TOTAL) * 100)}
               color={colors.progressGreen}
               backgroundColor={colors.timelineGray}
@@ -119,6 +121,18 @@ const Lesson = () => {
         windowSize={5}
         removeClippedSubviews
       />
+
+      <View style={styles.bottomFade} pointerEvents="none">
+        <Svg width="100%" height="100%">
+          <Defs>
+            <LinearGradient id="listFade" x1="0" y1="0" x2="0" y2="1">
+              <Stop offset="0" stopColor={colors.background} stopOpacity={0} />
+              <Stop offset="1" stopColor={colors.background} stopOpacity={1} />
+            </LinearGradient>
+          </Defs>
+          <Rect x="0" y="0" width="100%" height="100%" fill="url(#listFade)" />
+        </Svg>
+      </View>
     </View>
   );
 };

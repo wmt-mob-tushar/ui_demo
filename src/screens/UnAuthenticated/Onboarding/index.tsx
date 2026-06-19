@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { Image, View } from 'react-native';
 import { useUnistyles } from 'react-native-unistyles';
-import { Button, DeckCard, Screen, Text, useDeckGeometry } from '@/component';
+import { Button, DeckCard, Screen, Text } from '@/component';
 import { resetRoot } from '@/router/RootNavigation';
 import { onboardingSlides } from '@/data/onboarding';
 import { assets } from '@/theme';
@@ -9,7 +9,6 @@ import { styles } from './styles';
 
 const Onboarding = () => {
   const { theme } = useUnistyles();
-  const { geom } = useDeckGeometry();
 
   const [order, setOrder] = useState(() => onboardingSlides.map((_, i) => i));
 
@@ -56,8 +55,7 @@ const Onboarding = () => {
 
           <View
             style={[
-              styles.bulbAnchor,
-              { left: geom.L[0] + 7, top: geom.T[0] + 7, width: geom.W[0] - 14, height: geom.H[0] - 14 },
+              styles.bulbAnchor
             ]}
             pointerEvents="none">
             <View style={styles.bulb}>

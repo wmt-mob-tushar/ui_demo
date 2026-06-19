@@ -20,6 +20,8 @@ export const styles = StyleSheet.create(theme => ({
   },
   deco: {
     position: 'absolute',
+    right: theme.rw(-190.3),
+    bottom: theme.rh(80),
   },
   cardFront: {
     position: 'absolute',
@@ -39,7 +41,7 @@ export const styles = StyleSheet.create(theme => ({
   },
   cardTitle: {
     fontFamily: theme.typography.primary.medium,
-    fontSize: theme.rf(28),
+    fontSize: theme.rf(30),
     fontWeight: '500',
     letterSpacing: -0.33,
     color: theme.colors.primary,
@@ -54,17 +56,16 @@ export const styles = StyleSheet.create(theme => ({
   },
   pill: {
     alignSelf: 'flex-start',
-    backgroundColor: '#6CA2DF',
+    backgroundColor: theme.colors.pillBlue,
     borderRadius: theme.rf(32),
     paddingHorizontal: theme.rf(16),
     paddingVertical: theme.rf(6),
-    marginTop: theme.rf(8),
+    left: theme.rf(-6),
   },
   pillText: {
     fontFamily: theme.typography.primary.medium,
     fontSize: theme.rf(27),
     fontWeight: '500',
-    lineHeight: theme.rf(27),
     letterSpacing: -0.297,
     color: theme.colors.white,
   },
@@ -101,5 +102,9 @@ export const styles = StyleSheet.create(theme => ({
   },
   illoWrap: {
     position: 'absolute',
+    left: theme.rw(146.7),
+    top: theme.rh(109.1),
+    width: theme.rw(211.417),
+    height: theme.rh(227),
   },
 }));

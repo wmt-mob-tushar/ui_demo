@@ -20,6 +20,7 @@ export const Chip = ({ label, active = false, onPress, count, icon, style }: Chi
     style={[
       styles.chip,
       !icon && styles.chipNoIcon,
+      !icon && !count && styles.chipLabelOnly,
       active ? styles.chipActive : styles.chipInactive,
       style,
     ]}>

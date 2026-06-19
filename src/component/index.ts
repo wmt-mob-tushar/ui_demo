@@ -11,3 +11,4 @@ export * from './view/StreakCard';
 export * from './view/LearnCard';
 export * from './view/LessonCard';
 export * from './view/DeckCard';
+export * from './view/CardBridge';

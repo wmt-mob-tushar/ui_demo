@@ -27,10 +27,10 @@ export const styles = StyleSheet.create(theme => ({
     backgroundColor: '#F3F5F7',
   },
   card: {
-    backgroundColor: '#E5F2F9',
+    backgroundColor: theme.colors.iceBlue,
     borderRadius: 32,
     padding: 20,
-    marginTop: 16,
+    marginTop: 12,
   },
   headerRow: {
     flexDirection: 'row',
@@ -63,7 +63,7 @@ export const styles = StyleSheet.create(theme => ({
     paddingVertical: 10,
     paddingHorizontal: 14,
     borderRadius: 18,
-    backgroundColor: theme.colors.white,
+    backgroundColor: theme.colors.white29,
   },
   dropdownText: {
     fontFamily: theme.typography.primary.medium,

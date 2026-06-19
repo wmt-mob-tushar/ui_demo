@@ -2,8 +2,9 @@ import { useCallback, useState } from 'react';
 import { FlatList, ScrollView, View, Image, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { MenuView } from '@expo/ui/community/menu';
+import { useUnistyles } from 'react-native-unistyles';
 import { Ionicons as Icon } from '@expo/vector-icons';
-import { Chip, LearnCard, Screen, Text, CircularProgress } from '@/component';
+import { CardBridge, Chip, LearnCard, Screen, Text, CircularProgress } from '@/component';
 import { changeLanguage, languages } from '@/i18n';
 import { useAppDispatch, useAppSelector } from '@/reduxToolkit/hooks';
 import { setLanguage } from '@/reduxToolkit/rootSlice';
@@ -17,6 +18,7 @@ const FLAGS: Record<string, string> = { en: '🇬🇧', es: '🇪🇸' };
 const Home = () => {
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
+  const { theme } = useUnistyles();
   const { language } = useAppSelector(state => state.app);
   const langLabel = languages.find(l => l.code === language)?.label ?? 'English';
 
@@ -43,15 +45,28 @@ const Home = () => {
     [activeFilter],
   );
 
+  const openLesson = useCallback(() => navigation.navigate('Lesson'), [navigation]);
+
   const renderLearnCard = useCallback(
-    ({ item, index }: { item: LearnCardData; index: number }) => (
-      <LearnCard
-        card={item}
-        last={index === filteredCards.length - 1}
-        onStart={() => navigation.navigate('Lesson')}
-      />
-    ),
-    [navigation, filteredCards.length],
+    ({ item }: { item: LearnCardData }) => <LearnCard card={item} onStart={openLesson} />,
+    [openLesson],
+  );
+
+  const renderCardSeparator = useCallback(
+    ({ leadingItem }: { leadingItem: LearnCardData }) => {
+      const next = filteredCards[filteredCards.indexOf(leadingItem) + 1];
+      return (
+        <CardBridge
+          leftColor={leadingItem.bg}
+          rightColor={next?.bg ?? leadingItem.bg}
+          width={theme.rw(10)}
+          height={theme.rh(315)}
+          lobes={3}
+          pillHeight={theme.rh(40)}
+        />
+      );
+    },
+    [filteredCards, theme],
   );
 
   return (
@@ -156,6 +171,7 @@ const Home = () => {
         style={styles.bleedList}
         contentContainerStyle={styles.cardsContent}
         renderItem={renderLearnCard}
+        ItemSeparatorComponent={renderCardSeparator}
       />
     </Screen>
   );

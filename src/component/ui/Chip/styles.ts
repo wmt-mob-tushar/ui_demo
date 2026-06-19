@@ -13,6 +13,8 @@ export const styles = StyleSheet.create(theme => ({
   },
   chipNoIcon: {
     paddingLeft: theme.rf(16),
+  },
+  chipLabelOnly: {
     paddingRight: theme.rf(16),
   },
   chipActive: {

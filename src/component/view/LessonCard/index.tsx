@@ -12,7 +12,7 @@ export interface LessonCardProps {
   bg: string;
   buttonTx: TxKeyPath;
   disabled?: boolean;
-  faded?: boolean;
+
   onPress?: () => void;
 }
 
@@ -23,10 +23,10 @@ export const LessonCard = ({
   bg,
   buttonTx,
   disabled,
-  faded,
+
   onPress,
 }: LessonCardProps) => (
-  <View style={[styles.card, { backgroundColor: bg }, faded && styles.cardFaded]}>
+  <View style={[styles.card, { backgroundColor: bg }]}>
     <View style={styles.cardHeader}>
       <Text tx={titleTx} style={styles.cardTitle} />
       <View style={styles.durationBadge}>

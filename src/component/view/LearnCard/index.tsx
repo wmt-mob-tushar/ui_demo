@@ -1,8 +1,8 @@
+import { memo } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
-import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
-import { BlurView } from 'expo-blur';
 import { useUnistyles } from 'react-native-unistyles';
 import { Ionicons as Icon } from '@expo/vector-icons';
+import { GlassView } from '@/component/ui/GlassView';
 import { Text } from '@/component/ui/Text';
 import { LearnCard as LearnCardData } from '@/data/learn';
 import { assets, colors } from '@/theme';
@@ -10,21 +10,19 @@ import { styles } from './styles';
 
 type Props = {
   card: LearnCardData;
-  last: boolean;
   onStart: () => void;
 };
 
-export const LearnCard = ({ card, last, onStart }: Props) => {
+export const LearnCard = memo(({ card, onStart }: Props) => {
   const { theme } = useUnistyles();
   const Illustration = assets[card.illustration];
 
   return (
-    <View style={[styles.card, { backgroundColor: card.bg, marginRight: last ? 0 : theme.rw(10) }]}>
+    <View style={[styles.card, { backgroundColor: card.bg }]}>
       <assets.BackgroundVector
         style={styles.bgVector}
-        width={theme.rw(364.97)}
-        height={theme.rh(214.92)}
-        color={colors.white29}
+        width={theme.rw(450)}
+        color={colors.white17}
         pointerEvents="none"
       />
 
@@ -57,20 +55,7 @@ export const LearnCard = ({ card, last, onStart }: Props) => {
       </View>
 
       <Pressable style={styles.startBtn} onPress={onStart}>
-        <BlurView
-          style={StyleSheet.absoluteFill}
-          tint="light"
-          intensity={20}
-        />
-        <Svg style={StyleSheet.absoluteFill}>
-          <Defs>
-            <LinearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
-              <Stop offset="0.27" stopColor={colors.white} stopOpacity={0.8} />
-              <Stop offset="0.85" stopColor={colors.white} stopOpacity={0.32} />
-            </LinearGradient>
-          </Defs>
-          <Rect x="0" y="0" width="100%" height="100%" fill="url(#glass)" />
-        </Svg>
+        <GlassView style={StyleSheet.absoluteFill} borderRadius={64} intensity={21} tint={theme.colors.white84} />
         <Text tx="learnSection:startLearning" style={styles.startText} />
         <View style={styles.playCircle}>
           <Icon name="play" size={14} color={colors.white} style={styles.playIcon} />
@@ -78,4 +63,6 @@ export const LearnCard = ({ card, last, onStart }: Props) => {
       </Pressable>
     </View>
   );
-};
+});
+
+LearnCard.displayName = 'LearnCard';

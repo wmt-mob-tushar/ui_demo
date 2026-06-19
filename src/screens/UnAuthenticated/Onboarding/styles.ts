@@ -82,6 +82,10 @@ export const styles = StyleSheet.create((theme,rt) => ({
   bulbAnchor: {
     position: 'absolute',
     zIndex: 200,
+    left: theme.rw(23.3) + 7,
+    top: theme.rh(107.9) + 7,
+    width: theme.rw(340.068) - 14,
+    height: theme.rh(311.085) - 14,
   },
   bulb: {
     position: 'absolute',

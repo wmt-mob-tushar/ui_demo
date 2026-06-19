@@ -15,60 +15,12 @@ import { useUnistyles } from 'react-native-unistyles';
 import { Text } from '@/component/ui/Text';
 import { OnboardSlide } from '@/data/onboarding';
 import { assets, colors } from '@/theme';
+import { DeckGeom, DECO_SPEC, SLOT_COUNT, SLOT_SPECS } from '@/utils';
 import { styles } from './styles';
 
-// Figma geometry per stack slot (393×852 frame) — constant across cards.
-const SLOT_SPECS = [
-  { w: 340.068, h: 311.085, left: 23.3, top: 351.9, rot: 1.71, radius: 24 },
-  { w: 270.422, h: 179.664, left: 46, top: 292, rot: -7.47, radius: 20 },
-  { w: 200.383, h: 133.131, left: 101.61, top: 244, rot: 7.95, radius: 20 },
-];
-const ILLO_SPEC = { w: 211.417, h: 227, left: 170, top: 461 };
-const DECO_SPEC = { w: 364.96968, h: 214.9235, left: -33, top: 452, rot: 46.1 };
-
-const SLOT_COUNT = SLOT_SPECS.length;
 const INPUT = [0, 1, 2];
 const SPRING = { damping: 18, stiffness: 200, mass: 0.8 } as const;
 const FLY_MS = 260;
-
-export type DeckGeom = {
-  W: number[];
-  H: number[];
-  L: number[];
-  T: number[];
-  ROT: number[];
-  RAD: number[];
-};
-
-/** Scaled deck geometry (slot transforms + illustration/bg-vector placement). */
-export const useDeckGeometry = () => {
-  const { theme } = useUnistyles();
-  const baseTop = SLOT_SPECS[SLOT_COUNT - 1].top;
-
-  const geom: DeckGeom = {
-    W: SLOT_SPECS.map(s => theme.rw(s.w)),
-    H: SLOT_SPECS.map(s => theme.rh(s.h)),
-    L: SLOT_SPECS.map(s => theme.rw(s.left)),
-    T: SLOT_SPECS.map(s => theme.rh(s.top - baseTop)),
-    ROT: SLOT_SPECS.map(s => -s.rot),
-    RAD: SLOT_SPECS.map(s => theme.rf(s.radius)),
-  };
-  const illo = {
-    w: theme.rw(ILLO_SPEC.w),
-    h: theme.rh(ILLO_SPEC.h),
-    left: theme.rw(ILLO_SPEC.left - SLOT_SPECS[0].left),
-    top: theme.rh(ILLO_SPEC.top - SLOT_SPECS[0].top),
-  };
-  const deco = {
-    w: theme.rw(DECO_SPEC.w),
-    h: theme.rh(DECO_SPEC.h),
-    left: theme.rw(DECO_SPEC.left - SLOT_SPECS[0].left),
-    top: theme.rh(DECO_SPEC.top - SLOT_SPECS[0].top),
-    rotate: theme.rotation(DECO_SPEC.rot),
-  };
-
-  return { geom, illo, deco };
-};
 
 export interface DeckCardProps {
   slide: OnboardSlide;
@@ -90,7 +42,18 @@ export const DeckCard = ({
   onSwipe,
 }: DeckCardProps) => {
   const { width: screenW } = useWindowDimensions();
-  const { geom, illo, deco } = useDeckGeometry();
+  const { theme } = useUnistyles();
+
+  const baseTop = SLOT_SPECS[SLOT_COUNT - 1].top;
+  const geom: DeckGeom = {
+    W: SLOT_SPECS.map(s => theme.rw(s.w)),
+    H: SLOT_SPECS.map(s => theme.rh(s.h)),
+    L: SLOT_SPECS.map(s => theme.rw(s.left)),
+    T: SLOT_SPECS.map(s => theme.rh(s.top - baseTop)),
+    ROT: SLOT_SPECS.map(s => -s.rot),
+    RAD: SLOT_SPECS.map(s => theme.rf(s.radius)),
+  };
+  const deco = { w: theme.rw(DECO_SPEC.w), h: theme.rh(DECO_SPEC.h) };
 
   const pos = useSharedValue(slot);
   const tx = useSharedValue(0);
@@ -156,8 +119,8 @@ export const DeckCard = ({
           <assets.BackgroundVector
             width={deco.w}
             height={deco.h}
-            color={colors.white41}
-            style={[styles.deco, { left: deco.left, top: deco.top, transform: [{ rotate: deco.rotate }] }]}
+            color={colors.white20}
+            style={[styles.deco]}
           />
         </Animated.View>
 
@@ -179,9 +142,7 @@ export const DeckCard = ({
             <assets.StarSvg width={26} height={26} />
           </View>
 
-          <View
-            style={[styles.illoWrap, { left: illo.left, top: illo.top, width: illo.w, height: illo.h }]}
-            pointerEvents="none">
+          <View style={styles.illoWrap} pointerEvents="none">
             <Illustration width="100%" height="100%" />
           </View>
         </Animated.View>

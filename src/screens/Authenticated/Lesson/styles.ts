@@ -5,6 +5,13 @@ export const styles = StyleSheet.create((theme, rt) => ({
     flex: 1,
     backgroundColor: theme.colors.white,
   },
+  bottomFade: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: theme.rh(140),
+  },
   listContent: {
     paddingBottom: 48,
   },
@@ -77,15 +84,17 @@ export const styles = StyleSheet.create((theme, rt) => ({
     bottom: 0,
   },
 
-  // AI buddy banner (blurred)
+
   banner: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
     paddingVertical: 11,
     paddingHorizontal: 14,
-    borderRadius: 25,
+    borderRadius: 32,
     marginTop: 22,
+    backgroundColor: theme.colors.white84,
+    
   },
   bannerTextCol: {
     flex: 1,
@@ -106,17 +115,12 @@ export const styles = StyleSheet.create((theme, rt) => ({
     right: 16,
   },
   ringCircle: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-    backgroundColor: theme.colors.white,
+   padding: 4,
+    borderRadius: 100,
+    backgroundColor: theme.colors.white50,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: theme.colors.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
-    elevation: 3,
   },
 
   // ---- Lesson list rows ----
@@ -129,6 +133,6 @@ export const styles = StyleSheet.create((theme, rt) => ({
   cardCol: {
     flex: 1,
     marginLeft: 14,
-    paddingBottom: 20,
+    paddingBottom: 8,
   },
 }));

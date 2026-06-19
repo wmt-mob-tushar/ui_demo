@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native-unistyles';
 
 export const styles = StyleSheet.create(theme => ({
   card: {
-    backgroundColor: '#F1F1F180',
+    backgroundColor: theme.colors.streakOverlay,
     borderRadius: 32,
     padding: 20,
   },
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create(theme => ({
   badge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF96',
+    backgroundColor: theme.colors.white59,
     paddingHorizontal: 12,
     paddingVertical: 7,
     borderRadius: 14,
@@ -47,7 +47,7 @@ export const styles = StyleSheet.create(theme => ({
   track: {
     height: 36,
     borderRadius: 18,
-    backgroundColor: '#EEF1F3',
+    backgroundColor: theme.colors.surfaceMist,
     overflow: 'hidden',
     justifyContent: 'center',
   },
@@ -57,7 +57,7 @@ export const styles = StyleSheet.create(theme => ({
     top: 0,
     bottom: 0,
     borderRadius: 18,
-    backgroundColor: 'rgba(129, 167, 56, 0.25)',
+    backgroundColor: theme.colors.progressGreen25,
   },
   tick: {
     position: 'absolute',
@@ -66,7 +66,7 @@ export const styles = StyleSheet.create(theme => ({
     height: 12,
     marginLeft: -1,
     borderRadius: 1,
-    backgroundColor: 'rgba(129, 167, 56, 0.6)',
+    backgroundColor: theme.colors.progressGreen60,
   },
   fireCircle: {
     position: 'absolute',
@@ -102,10 +102,8 @@ export const styles = StyleSheet.create(theme => ({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#ECEDF0',
-    borderRadius: 16,
+    backgroundColor: theme.colors.white,
+    borderRadius: 100,
     paddingHorizontal: 12,
     paddingVertical: 10,
     marginTop: 18,

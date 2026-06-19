@@ -2,11 +2,8 @@ import { StyleSheet } from 'react-native-unistyles';
 
 export const styles = StyleSheet.create(theme => ({
   card: {
-    padding: 20,
+    padding: 12,
     borderRadius: 30,
-  },
-  cardFaded: {
-    opacity: 0.5,
   },
   cardHeader: {
     flexDirection: 'row',
@@ -21,12 +18,13 @@ export const styles = StyleSheet.create(theme => ({
     letterSpacing: -0.176,
     color: theme.colors.primary,
     flex: 1,
+    paddingLeft: 8,
     paddingRight: 8,
   },
   durationBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: theme.colors.white,
+    backgroundColor: theme.colors.white38,
     paddingHorizontal: 12,
     paddingVertical: 7,
     borderRadius: 16,
@@ -56,7 +54,6 @@ export const styles = StyleSheet.create(theme => ({
   playBtn: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: theme.rw(118),
     backgroundColor: theme.colors.white,
     paddingLeft: 16,
     paddingRight: 6,
@@ -64,8 +61,6 @@ export const styles = StyleSheet.create(theme => ({
     borderRadius: 24,
   },
   playBtnText: {
-    flex: 1,
-    textAlign: 'center',
     fontFamily: theme.typography.primary.bold,
     fontSize: theme.rf(10),
     lineHeight: theme.rf(13),

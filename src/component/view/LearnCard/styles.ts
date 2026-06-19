@@ -10,8 +10,8 @@ export const styles = StyleSheet.create(theme => ({
   },
   bgVector: {
     position: 'absolute',
-    right: theme.rw(-49),
-    bottom: theme.rh(0),
+    right: theme.rw(-70),
+    bottom: theme.rh(-80),
   },
   topRow: {
     flexDirection: 'row',
@@ -33,14 +33,14 @@ export const styles = StyleSheet.create(theme => ({
   metaPill: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: theme.rf(4),
+    gap: theme.rf(2),
     height: theme.rf(36),
-    paddingHorizontal: theme.rf(12),
+    paddingHorizontal: theme.rf(16),
     borderRadius: theme.rf(24),
     backgroundColor: theme.colors.white17,
   },
   metaText: {
-    fontFamily: theme.typography.primary.medium,
+    fontFamily: theme.typography.primary.bold,
     fontSize: theme.rf(10),
     fontWeight: '600',
     letterSpacing: -0.11,
@@ -76,9 +76,11 @@ export const styles = StyleSheet.create(theme => ({
     justifyContent: 'space-between',
     borderRadius: theme.rf(64),
     overflow: 'hidden',
-    paddingVertical: theme.rf(10),
+    borderWidth: 1,
+    borderColor: theme.colors.white60,
+    paddingVertical: theme.rf(6),
     paddingLeft: theme.rf(22),
-    paddingRight: theme.rf(10),
+    paddingRight: theme.rf(6),
   },
   startText: {
     fontFamily: theme.typography.primary.bold,
